@@ -19,8 +19,10 @@ async function getJokesVaultFile(): Promise<JokesVault> {
 async function addJokeToVault(joke: string) {
   try {
     const data = await getJokesVaultFile()
-    data.jokes.push(joke)
-    await fs.writeFile(filePath, JSON.stringify(data, null, 2))
+    if (!data.jokes.includes(joke)) {
+      data.jokes.push(joke)
+      await fs.writeFile(filePath, JSON.stringify(data, null, 2))
+    }
   } catch (error) {
     console.error('Issue writing the jokesvault file:', error)
     throw new Error("Couldn't write the jokesvault file")
