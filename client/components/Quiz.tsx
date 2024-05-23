@@ -3,7 +3,6 @@ import request from 'superagent'
 import { useQuery } from '@tanstack/react-query'
 
 const Quiz = () => {
-
   const [chosenLevel, setChosenLevel] = useState<string | null>(null)
   const [words, setWords] = useState(null)
   const [correctAnswers, setCorrectAnswers] = useState([])
@@ -73,13 +72,13 @@ return (
       
       {words.quizlist.map((question: any, index: Key | null | undefined) => <div key={index} className='bg-black text-white m-10'>
         {question.quiz.map(clues => (
-          <p key="clues">{clues}</p>
+          <p key={clues}>{clues}</p>
         ))}
         
         <div className={"questions-buttons flex"}>
           {question.option.map( (option, optionIndex) => (
 
-            <div key="butt" className="flex-row">
+            <div key={option} className="flex-row">
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
               
                 onClick={()=> checkAnswer(option, optionIndex + 1, question.correct)}
