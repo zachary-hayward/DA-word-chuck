@@ -12,6 +12,19 @@ export async function getJoke() {
   return res.body as Jokes
 }
 
+export async function getJokesList() {
+  const jokes: string[] = []
+  for (let i = 0; i < 10; i++) {
+    try {
+      const res = await request.get('/api/v1/jokes')
+      jokes.push(res.body.value)
+    } catch (error) {
+      console.log("Error retrieving joke for jokeslist:", error)
+    }
+  }
+  return jokes
+}
+
 export async function getJokesVault() {
   const res = await request.get('/api/v1/jokesvault')
   return res.body as JokesVault
