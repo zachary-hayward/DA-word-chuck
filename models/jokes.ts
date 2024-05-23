@@ -7,3 +7,7 @@ export interface Jokes {
     url:        string;
     value:      string;
 }
+
+export interface JokesVault {
+  jokes: string[]
+}

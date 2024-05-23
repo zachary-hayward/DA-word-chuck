@@ -3,6 +3,7 @@ import express from 'express'
 import cors, { CorsOptions } from 'cors'
 import dotenv from 'dotenv'
 import jokes from './routes/jokes.ts'
+import jokesvault from './routes/jokesvault.ts'
 import quiz from './routes/quiz.ts'
 
 dotenv.config()
@@ -10,6 +11,7 @@ dotenv.config()
 const server = express()
 
 server.use('/api/v1/jokes', jokes)
+server.use('/api/v1/jokesvault', jokesvault)
 server.use('/api/v1/quiz', quiz)
 
 server.get('/api/v1/greeting', (req, res) => {
