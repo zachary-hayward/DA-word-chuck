@@ -1,29 +1,37 @@
-import { getJoke, getJokesList } from '../apiClient.ts'
-import { useQuery, useState } from '@tanstack/react-query'
+import { getJoke } from '../apiClient.ts'
+import {postToJokesVault} from '../apiClient.ts'
+import { useQuery } from '@tanstack/react-query'
+
+
 
 const Jokes = () => {
-  const [jokes, setJokes] = useState([])
-  const [jokeCounter, setJokeCounter] = useState(0)
 
   const {
     data,
-    isPending,
     isError,
-    error,
-  } = useQuery({
-    queryKey: ['jokes'], 
-    queryFn: getJoke,
-    staleTime: Infinity,
-    enabled: jokeCounter < 10,
-    onSuccess: (data) => {
-      setJokes((prevJokes: string[]) => [...prevJokes, data.value])
-      setJokeCounter((prevJokeCounter: number) => prevJokeCounter++)
-    }
-  })
-  if (isPending) console.log("Loading Jokes...")
-  if (isError) console.log("Got an error while trying to load jokes:", error)
+    isPending,
+  } = useQuery({ queryKey: ['jokes'], queryFn: getJoke })
+
+  if (isPending) return <p>Finding a great Norris Chuckler...</p>
+  if (isError) return <p>Awwwwwwwwww rats. Not today.</p>
  
-  if (jokes && jokes.length == 10) return jokes
+  const handleAddToVault = async () => {
+    try {
+      await postToJokesVault(data.value)
+    } catch(error) {
+      console.error("Couldn't post joke to vault", error)
+    }
+  }
+
+  if (data)  {
+    return (
+      <div>
+        {data.value}
+        <button onClick={handleAddToVault}>Add Joke to Vault</button>
+      </div>
+    )
+  }
+  return null
 }
 
 export default Jokes
