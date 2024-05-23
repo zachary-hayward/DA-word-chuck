@@ -7,8 +7,10 @@ export async function getGreeting() {
   return res.body.greeting as string
 }
 
-export async function getQuiz() {
-  const res = await request.get('/api/v1/quiz')
+export async function getQuiz(level?: string, area?: string) {
+  const res = await request
+    .get('/api/v1/quiz')
+    .query({level, area})
   return res.body as Quiz
 }
 

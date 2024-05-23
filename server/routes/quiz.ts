@@ -4,9 +4,8 @@ import request from 'superagent'
 const router = Router()
 
 router.get('/', async (req,res) => {
-  let {level, area} = req.query
-  level = level as string || '1'
-  area = area as string || 'sat'
+  const level = req.query.level || '1'
+  const area = req.query.area || 'sat'
   try {
     const result = await request.get('https://twinword-word-association-quiz.p.rapidapi.com/type1/')
       .query({ level, area})
