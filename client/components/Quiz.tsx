@@ -35,7 +35,7 @@ const handleChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
 }
 
 const checkAnswer = (option, optionIndex, correctAnswer) => {
-  console.log(optionIndex, correctAnswer)
+  console.log([optionIndex, correctAnswer])
   if (optionIndex === correctAnswer) {
     setCorrectAnswers([...correctAnswers, option])
   }
