@@ -17,10 +17,12 @@ export async function getJokesVault() {
   return res.body as JokesVault
 }
 
-export async function addToJokesVault(joke: string) {
+export async function postToJokesVault(joke: string) {
+  if (!joke) console.error("No joke received to postToJokesVault")
+  console.log(joke)
   const res = await request
     .post('/api/v1/jokesvault')
-    .query({joke})
+    .send({joke})
   return res.body as JokesVault
 }
 

@@ -10,6 +10,8 @@ dotenv.config()
 
 const server = express()
 
+server.use(express.json())
+
 server.use('/api/v1/jokes', jokes)
 server.use('/api/v1/jokesvault', jokesvault)
 server.use('/api/v1/quiz', quiz)
