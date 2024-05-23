@@ -1,3 +1,58 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.custom-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff9b16;
+  -webkit-text-stroke: 1px black;
+  text-align: center;
+  font: ;
+
+}
+
+.custom-button-quiz {
+  padding: 1px 1px;
+  color: #fcce8d;
+  display: inline-flex;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: black;
+  margin: 5px;
+  text-align: left;
+  justify-content: space-between;
+  background-color: #9b5800 !important;
+  margin: 5;
+  
+}
+
+.Quiz-rounded-div {
+  background-color: linear-gradient(to right, #fec163, #de4313, );
+  border-radius: 900px;
+  padding: 2rem;
+}
+
+.header {
+  .header {
+    background-color: #9b5800; /* Background color */
+    color: #ff9b16; /* Text color */
+    padding: 20px; /* Padding */
+    display: flex; /* Flexbox layout */
+    justify-content: space-between; /* Space between items */
+    align-items: center; /* Center items vertically */
+}
+}
+
+.main-logo{
+  max-width: 100%;
+  height: auto;
+}
+
+.container-header-img {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 100vh; /* Full height of the viewport */
+}

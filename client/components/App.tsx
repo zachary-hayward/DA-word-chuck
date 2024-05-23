@@ -16,7 +16,7 @@ const App = () => {
   return (
     <>
       {count}
-      <h1 className="text-3xl font-bold underline">{greeting}</h1>
+      <h1 className="custom-heading">{greeting}</h1>
       {isError && (
         <p style={{ color: 'red' }}>
           There was an error retrieving the greeting.

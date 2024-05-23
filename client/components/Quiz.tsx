@@ -46,8 +46,8 @@ return (
 
   <div className="Quiz">
 
-    <div className="title">
-    <h1 className= "text-gray-900 md:text-5xl lg:text-6xl m-10">Word Chuck</h1>
+    <div className="Title">
+    <h1 className= "custom-heading">Word Chuck</h1>
     <p className="m-10">WordChuck&apos;s no joke (but the jokes are!). Test your vocabulary faster than Chuck throws kicks. Score right, get a Norris joke so tough it could KO a rhino. Sharpen your mental skills and become a trivia Texas Ranger, Chuck Norris style!</p>
     </div>
     {!chosenLevel && <div className="level-select" className="bg-slate-300">
@@ -68,18 +68,18 @@ return (
     </div>}
 
     {chosenLevel && words && <div className="question">
-      <h1 className="m-10 bg-amber-300">Welcome to Dojo: {chosenLevel}</h1>
+      <h1 className="custom-heading">Welcome to Dojo: {chosenLevel}</h1>
       
       {words.quizlist.map((question: any, index: Key | null | undefined) => <div key={index} className='bg-black text-white m-10'>
         {question.quiz.map(clues => (
           <p key={clues}>{clues}</p>
         ))}
         
-        <div className={"questions-buttons flex"}>
+        <div className={"custom-button-quiz, mx-2, inline-flex"}>
           {question.option.map( (option, optionIndex) => (
 
-            <div key={option} className="flex-row">
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded "
+            <div key={option} className="flex">
+              <button className="custom-button-quiz"
               
                 onClick={()=> checkAnswer(option, optionIndex + 1, question.correct)}
               >{option}</button>
