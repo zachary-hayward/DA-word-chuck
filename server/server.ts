@@ -1,6 +1,9 @@
 import * as Path from 'node:path'
 import express from 'express'
 import cors, { CorsOptions } from 'cors'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const server = express()
 
