@@ -1,4 +1,3 @@
-import JokesVault from './JokesVault.tsx'
 import { getJoke } from '../apiClient.ts'
 import {postToJokesVault} from '../apiClient.ts'
 import { useQuery } from '@tanstack/react-query'
