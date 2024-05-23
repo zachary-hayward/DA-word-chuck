@@ -2,45 +2,59 @@ import { useState, useEffect, Key } from 'react'
 import request from 'superagent'
 import { useQuery } from '@tanstack/react-query'
 
+import { getJokesList } from '../apiClient.ts'
+
 const Quiz = () => {
   const [chosenLevel, setChosenLevel] = useState<string | null>(null)
   const [words, setWords] = useState(null)
   const [correctAnswers, setCorrectAnswers] = useState([])
+  const [jokes, setJokes] = useState<string[]>([])
 
-useEffect(() => {
-const getRandomWords = async (): Promise<void> => {
-
-try {
-  const result = await request 
-      .get('https://twinword-word-association-quiz.p.rapidapi.com/type1/')
-      .query({ level: chosenLevel, area: 'sat'})
-      .set(
-        'X-RapidAPI-Key',
-        '3ca90152f0msha86109f176538a4p169f93jsn2e857e825d33',
-      )
-      .set('X-RapidAPI-Host', 'twinword-word-association-quiz.p.rapidapi.com')
-      console.log(result.body)
-      setWords(result.body)
-    } catch (error) {
-        console.error(error)
+  useEffect(() => {
+    const getJokeList = async () => {
+      try {
+        const result = await getJokesList()
+        setJokes(result)
+      } catch (error) {
+        console.error("Error getting JokeList:", error)
       }
-}
+    }
+    getJokeList()
+  }, [])
 
-console.log(words && words.quizlist)
-  if (chosenLevel) getRandomWords()
-}, [chosenLevel])
+  useEffect(() => {
+  const getRandomWords = async (): Promise<void> => {
 
-const handleChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
-  setChosenLevel(e.target.value)
-}
-
-const checkAnswer = (option, optionIndex, correctAnswer) => {
-  console.log([optionIndex, correctAnswer])
-  if (optionIndex === correctAnswer) {
-    setCorrectAnswers([...correctAnswers, option])
+    try {
+      const result = await request 
+        .get('https://twinword-word-association-quiz.p.rapidapi.com/type1/')
+        .query({ level: chosenLevel, area: 'sat'})
+        .set(
+          'X-RapidAPI-Key',
+          '3ca90152f0msha86109f176538a4p169f93jsn2e857e825d33',
+        )
+        .set('X-RapidAPI-Host', 'twinword-word-association-quiz.p.rapidapi.com')
+        console.log(result.body)
+        setWords(result.body)
+    } catch (error) {
+      console.error(error)
+    }
   }
-}
 
+  console.log(words && words.quizlist)
+    if (chosenLevel) getRandomWords()
+  }, [chosenLevel])
+
+  const handleChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
+    setChosenLevel(e.target.value)
+  }
+
+  const checkAnswer = (option, optionIndex, correctAnswer) => {
+    console.log([optionIndex, correctAnswer])
+    if (optionIndex === correctAnswer) {
+      setCorrectAnswers([...correctAnswers, option])
+    }
+  }
 
 return (
 
