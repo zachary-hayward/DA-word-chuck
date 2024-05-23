@@ -1,4 +1,4 @@
-import { getJoke } from '../jokesApiClient.ts'
+import { getJoke } from '../apiClient.ts'
 import { useQuery } from '@tanstack/react-query'
 
 const Jokes = () => {
