@@ -105,7 +105,7 @@ return (
         </div>
         
         
-        <p>{question.correct}</p>
+        <h1>{jokes[Number(index)]}</h1>
       </div>)}
     </div>}
   </div>
