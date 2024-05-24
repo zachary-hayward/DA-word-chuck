@@ -106,7 +106,6 @@ return (
         <p>{question.correct}</p>
       </div>)}
     </div>}
-
   </div>
 )
 
