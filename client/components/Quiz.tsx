@@ -1,6 +1,4 @@
 import { useState, useEffect, Key } from 'react'
-import request from 'superagent'
-import { useQuery } from '@tanstack/react-query'
 
 import { getJokesList } from '../apiClient.ts'
 import { getQuiz } from '../apiClient.ts'
@@ -28,8 +26,7 @@ const Quiz = () => {
     const getRandomWords = async (): Promise<void> => {
       try {
         const result = await getQuiz(chosenLevel, 'sat')
-        console.log(result.body)
-        setWords(result.body)
+        setWords(result)
       } catch (error) {
         console.error(error)
       }

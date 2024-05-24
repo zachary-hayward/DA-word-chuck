@@ -11,6 +11,7 @@ dotenv.config()
 const server = express()
 
 server.use(express.json())
+server.use(express.static(Path.resolve('../images')))
 
 server.use('/api/v1/jokes', jokes)
 server.use('/api/v1/jokesvault', jokesvault)
