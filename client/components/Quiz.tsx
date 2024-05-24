@@ -10,6 +10,7 @@ const Quiz = () => {
   const [words, setWords] = useState(null)
   const [correctAnswers, setCorrectAnswers] = useState([])
   const [jokes, setJokes] = useState<string[]>([])
+  const [answers, setAnswers] = useState<boolean[]>([false,false,false,false,false,false,false,false,false,false])
 
   useEffect(() => {
     const getJokeList = async () => {
@@ -48,11 +49,17 @@ const Quiz = () => {
     setChosenLevel(e.target.value)
   }
 
-  const checkAnswer = (option, optionIndex, correctAnswer) => {
+  const checkAnswer = (option, optionIndex, correctAnswer, index) => {
     console.log([optionIndex, correctAnswer])
     if (optionIndex === correctAnswer) {
-      setCorrectAnswers([...correctAnswers, option])
+      setCorrectAnswers([...correctAnswers, optionIndex])
+      setAnswers((prevAnswers) => {
+        const newAnswers = [...prevAnswers]
+        newAnswers[index]=true
+        return newAnswers
+      })
     }
+    console.log(answers)
   }
 
 return (
@@ -97,15 +104,15 @@ return (
             <div key={option} className="x">
               <button className="custom-button-quiz"
               
-                onClick={()=> checkAnswer(option, optionIndex + 1, question.correct)}
+                onClick={()=> checkAnswer(option, optionIndex + 1, question.correct, index)}
               >{option}</button>
             </div>
 
           ))}
         </div>
+        {answers[Number(index)] && <p>{jokes[Number(index)]}</p>}
         
-        
-        <h1>{jokes[Number(index)]}</h1>
+        {/* <p>{jokes[Number(index)]}</p> */}
       </div>)}
     </div>}
   </div>
