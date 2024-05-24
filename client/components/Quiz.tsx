@@ -27,22 +27,14 @@ const Quiz = () => {
   useEffect(() => {
     const getRandomWords = async (): Promise<void> => {
       try {
-        const result = await request
-          .get('https://twinword-word-association-quiz.p.rapidapi.com/type1/')
-          .query({ level: chosenLevel, area: 'sat'})
-          .set(
-            'X-RapidAPI-Key',
-            '3ca90152f0msha86109f176538a4p169f93jsn2e857e825d33',
-          )
-          .set('X-RapidAPI-Host', 'twinword-word-association-quiz.p.rapidapi.com')
-          console.log(result.body)
-          setWords(result.body)
+        const result = await getQuiz(chosenLevel, 'sat')
+        console.log(result.body)
+        setWords(result.body)
       } catch (error) {
         console.error(error)
       }
     }
-    console.log(words && words.quizlist)
-      if (chosenLevel) getRandomWords()
+    if (chosenLevel) getRandomWords()
   }, [chosenLevel])
 
   const handleChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
