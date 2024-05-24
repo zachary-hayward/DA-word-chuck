@@ -3,6 +3,7 @@ import request from 'superagent'
 import { useQuery } from '@tanstack/react-query'
 
 import { getJokesList } from '../apiClient.ts'
+import { getQuiz } from '../apiClient.ts'
 
 const Quiz = () => {
   const [chosenLevel, setChosenLevel] = useState<string | null>(null)
@@ -23,26 +24,24 @@ const Quiz = () => {
   }, [])
 
   useEffect(() => {
-  const getRandomWords = async (): Promise<void> => {
-
-    try {
-      const result = await request 
-        .get('https://twinword-word-association-quiz.p.rapidapi.com/type1/')
-        .query({ level: chosenLevel, area: 'sat'})
-        .set(
-          'X-RapidAPI-Key',
-          '3ca90152f0msha86109f176538a4p169f93jsn2e857e825d33',
-        )
-        .set('X-RapidAPI-Host', 'twinword-word-association-quiz.p.rapidapi.com')
-        console.log(result.body)
-        setWords(result.body)
-    } catch (error) {
-      console.error(error)
+    const getRandomWords = async (): Promise<void> => {
+      try {
+        const result = await request
+          .get('https://twinword-word-association-quiz.p.rapidapi.com/type1/')
+          .query({ level: chosenLevel, area: 'sat'})
+          .set(
+            'X-RapidAPI-Key',
+            '3ca90152f0msha86109f176538a4p169f93jsn2e857e825d33',
+          )
+          .set('X-RapidAPI-Host', 'twinword-word-association-quiz.p.rapidapi.com')
+          console.log(result.body)
+          setWords(result.body)
+      } catch (error) {
+        console.error(error)
+      }
     }
-  }
-
-  console.log(words && words.quizlist)
-    if (chosenLevel) getRandomWords()
+    console.log(words && words.quizlist)
+      if (chosenLevel) getRandomWords()
   }, [chosenLevel])
 
   const handleChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
@@ -59,12 +58,15 @@ const Quiz = () => {
 return (
 
   <div className="Quiz">
-
+       <div className="container-header-img">
+         <img src="../../images/chuck.png" 
+           alt="Chuck Norris Kicking x Chuck Word = Chuck Word logo" 
+         className="main-logo, flex" />
+       </div>
     <div className="Title">
-    <h1 className= "custom-heading">Word Chuck</h1>
-    <p className="m-10">WordChuck&apos;s no joke (but the jokes are!). Test your vocabulary faster than Chuck throws kicks. Score right, get a Norris joke so tough it could KO a rhino. Sharpen your mental skills and become a trivia Texas Ranger, Chuck Norris style!</p>
+    <p className="m-10 text-xl">WordChuck&apos;s no joke (but the jokes are!). Test your vocabulary faster than Chuck throws kicks. Score right, get a Norris joke so tough it could KO a rhino. Sharpen your mental skills and become a trivia Texas Ranger, Chuck Norris style!</p>
     </div>
-    {!chosenLevel && <div className="level-select" className="bg-slate-300">
+    {!chosenLevel && <div className="level-select bg-amber-700 text-xl text-black">
     <p className="m-10">Pick your WordChuck pain level (1-10): 1 is a gentle breeze, 10 is a Chuck Norris roundhouse kick to your vocabulary.</p>
     <select className="mx-10" name="levels" id="levels" value={chosenLevel ?? ''} onChange={handleChange}>
       <option value={''}>Select Dojo</option>
@@ -82,9 +84,9 @@ return (
     </div>}
 
     {chosenLevel && words && <div className="question">
-      <h1 className="custom-heading">Welcome to Dojo: {chosenLevel}</h1>
+      <h1 className="custom-sub-heading">Welcome to Dojo: {chosenLevel}</h1>
       
-      {words.quizlist.map((question: any, index: Key | null | undefined) => <div key={index} className='bg-black text-white m-10'>
+      {words.quizlist.map((question: any, index: Key | null | undefined) => <div key={index} className='p-6 rounded-md text-white text-xl m-20 mb-20 bg-blue-950 border border-8 border-black p-4'>
         {question.quiz.map(clues => (
           <p key={clues}>{clues}</p>
         ))}
@@ -92,7 +94,7 @@ return (
         <div className={"custom-button-quiz, mx-2, inline-flex"}>
           {question.option.map( (option, optionIndex) => (
 
-            <div key={option} className="flex">
+            <div key={option} className="x">
               <button className="custom-button-quiz"
               
                 onClick={()=> checkAnswer(option, optionIndex + 1, question.correct)}

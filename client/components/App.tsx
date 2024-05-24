@@ -1,29 +1,21 @@
 import { useState } from 'react'
-import { getGreeting } from '../apiClient.ts'
-import { useQuery } from '@tanstack/react-query'
+// import { useQuery } from '@tanstack/react-query'
+import Quiz from './Quiz'
 
 const App = () => {
-  const [count, setCount] = useState(0)
+  const [page, setPage] = useState('home')
 
-  const {
-    data: greeting,
-    isError,
-    isPending,
-  } = useQuery({ queryKey: ['greeting', count], queryFn: getGreeting })
-
-  if (isPending) return <p>Loading...</p>
+  const handlePageChange = (newPage) => {
+    setPage(newPage)
+  }
 
   return (
-    <>
-      {count}
-      <h1 className="custom-heading">{greeting}</h1>
-      {isError && (
-        <p style={{ color: 'red' }}>
-          There was an error retrieving the greeting.
-        </p>
-      )}
-      <button onClick={() => setCount(count + 1)}>Click</button>
-    </>
+    <div className="App">
+      <header className="bg-gray-800 text-white p-4">
+        <h1 className="text-3xl font-semibold">Word Chuck</h1>
+      </header>
+      <Quiz />
+    </div>
   )
 }
 
