@@ -4,4 +4,5 @@
 
 ### Skills
 - [ ] Was a great initial play around with API's in a less teacher led fashion.
-- [ ] Was maybe one of the more confident coders in the group so lots of communication and sharing of skills and understanding.
+- [ ] Was lots of communication and sharing of skills and understanding of coding in this group.
+- [ ] Had my first successful deployment to the Dokku server Dev Academy had for us without having to get any assistance.
